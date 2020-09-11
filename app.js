@@ -23,14 +23,25 @@ app.get('/movies', function (req, res) {
     })
     .then(async (response) => {
       const moviesId = response.data.results.map((movie) => movie.id);
-      const allMovieDetails = moviesId.map(async (movieId) => {
-        let request = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+      const allMoviesData = moviesId.map(async (movieId) => {
+        let detailsRequest = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
           headers,
         });
 
-        return request.data;
+        let translationsRequest = await axios.get(
+          `https://api.themoviedb.org/3/movie/${movieId}/translations`,
+          {
+            headers,
+          }
+        );
+        await Promise.all([detailsRequest, translationsRequest]);
+        return {
+          id: movieId,
+          details: detailsRequest.data,
+          translations: translationsRequest.data,
+        };
       });
-      const movieAwnser = await Promise.all(allMovieDetails);
+      const movieAwnser = await Promise.all(allMoviesData);
       res.status(200).json(movieAwnser);
     })
     .catch((err) => {
