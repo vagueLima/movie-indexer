@@ -21,13 +21,17 @@ app.get('/movies', function (req, res) {
       params: paramsToMovieDb,
       headers,
     })
-    .then((response) => {
-      const prunedMovieObject = response.data.results.map((movie) => ({
-        id: movie.id,
-        original_language: movie.original_language,
-        original_title: movie.original_title,
-      }));
-      res.status(200).json(prunedMovieObject);
+    .then(async (response) => {
+      const moviesId = response.data.results.map((movie) => movie.id);
+      const allMovieDetails = moviesId.map(async (movieId) => {
+        let request = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+          headers,
+        });
+
+        return request.data;
+      });
+      const movieAwnser = await Promise.all(allMovieDetails);
+      res.status(200).json(movieAwnser);
     })
     .catch((err) => {
       res.status(500).send('Something went wrong');
