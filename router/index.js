@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const { searchMovies, getMovieDetailsAndTranslations } = require('../movieDbAPI');
 
 router.get('/movies', function (req, res) {
