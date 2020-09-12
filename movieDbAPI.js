@@ -32,14 +32,18 @@ async function getMovieDetailsAndTranslations(movieId) {
     translationsRequestPromise,
   ]);
   const movieDetails = detailsRequest.data;
-  const MovieRecord = await saveMovie(movieDetails);
-
   const movieTranslations = translationsRequest.data.translations;
-  const movieTranslationsRecord = await saveMovieTranslations(
-    MovieRecord._id,
-    movieId,
-    movieTranslations
-  );
+  try {
+    const MovieRecord = await saveMovie(movieDetails);
+    const movieTranslationsRecord = await saveMovieTranslations(
+      MovieRecord._id,
+      movieId,
+      movieTranslations
+    );
+  } catch (err) {
+    console.warn(`Couldnt persist some of the data!It's probably already in the database`);
+  }
+
   return {
     id: movieId,
     details: movieDetails,

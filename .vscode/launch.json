@@ -24,7 +24,7 @@
       "request": "launch",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/src/yourNodeIndex.js"
+      "program": "${workspaceFolder}/src/server.js"
     }
   ]
 }
