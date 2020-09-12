@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let translationsSchema = Schema({
+  movie_schema_id: { type: Schema.Types.ObjectId, default: undefined },
   id: {
     type: 'Number',
     required: true,

@@ -6,7 +6,6 @@ const app = express();
 const morgan = require('morgan');
 const router = require('./router');
 
-//mongodb://<username>:<password>@localhost:27017/<database>?reretryWrites=true&w=majority
 const MONGO_URL = process.env.MONGO_URL;
 mongoose.set('useCreateIndex', true);
 mongoose.connect(MONGO_URL, {

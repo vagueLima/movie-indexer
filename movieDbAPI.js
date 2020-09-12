@@ -1,7 +1,7 @@
 const axios = require('axios');
 const MOVIEDB_BEARER_TOKEN = process.env.BEARER_TOKEN;
 const headers = { Authorization: `Bearer ${MOVIEDB_BEARER_TOKEN}` };
-
+const { saveMovie, saveMovieTranslations } = require('./storageAdapter');
 async function searchMovies(searchTerm) {
   const paramsToMovieDb = {
     query: searchTerm,
@@ -31,10 +31,19 @@ async function getMovieDetailsAndTranslations(movieId) {
     detailsRequestPromise,
     translationsRequestPromise,
   ]);
+  const movieDetails = detailsRequest.data;
+  const MovieRecord = await saveMovie(movieDetails);
+
+  const movieTranslations = translationsRequest.data.translations;
+  const movieTranslationsRecord = await saveMovieTranslations(
+    MovieRecord._id,
+    movieId,
+    movieTranslations
+  );
   return {
     id: movieId,
-    details: detailsRequest.data,
-    translations: translationsRequest.data.translations,
+    details: movieDetails,
+    translations: movieTranslations,
   };
 }
 
