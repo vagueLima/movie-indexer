@@ -2,7 +2,7 @@ const axios = require('axios');
 const MOVIEDB_BEARER_TOKEN = process.env.BEARER_TOKEN;
 const MOVIEDB_API_URL = 'https://api.themoviedb.org/3';
 const headers = { Authorization: `Bearer ${MOVIEDB_BEARER_TOKEN}` };
-const { saveMovie, saveMovieTranslations } = require('./storageAdapter');
+const { saveMovie, saveMovieTranslations } = require('./storage/storageAdapter');
 async function searchMovies(searchTerm) {
   const paramsToMovieDb = {
     query: searchTerm,

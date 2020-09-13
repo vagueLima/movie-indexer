@@ -8,7 +8,6 @@ router.get('/movies', function (req, res) {
     res.status(400).send('No query to search for the movies was detected');
     return;
   }
-
   searchMovies(searchTerm)
     .then(async (response) => {
       const moviesId = response.data.results.map((movie) => movie.id);
