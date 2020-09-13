@@ -1,0 +1,35 @@
+{
+  "name": "movie-indexer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.5",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "dot": "^1.1.3",
+    "esm": "^3.2.25",
+    "mocha": "^8.1.3",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
+  },
+  "scripts": {
+    "test": "mocha tests",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vagueLima/movie-indexer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vagueLima/movie-indexer/issues"
+  },
+  "homepage": "https://github.com/vagueLima/movie-indexer#readme"
+}
