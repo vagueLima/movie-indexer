@@ -1,25 +1,26 @@
 const axios = require('axios');
 const MOVIEDB_BEARER_TOKEN = process.env.BEARER_TOKEN;
+const MOVIEDB_API_URL = 'https://api.themoviedb.org/3';
 const headers = { Authorization: `Bearer ${MOVIEDB_BEARER_TOKEN}` };
 const { saveMovie, saveMovieTranslations } = require('./storageAdapter');
 async function searchMovies(searchTerm) {
   const paramsToMovieDb = {
     query: searchTerm,
   };
-  return axios.get('https://api.themoviedb.org/3/search/movie', {
+  return axios.get(`${MOVIEDB_API_URL}/search/movie`, {
     params: paramsToMovieDb,
     headers,
   });
 }
 
 async function getMovieDetails(movieId) {
-  return axios.get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+  return axios.get(`${MOVIEDB_API_URL}/movie/${movieId}`, {
     headers,
   });
 }
 
 async function getMovieTranslations(movieId) {
-  return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/translations`, {
+  return axios.get(`${MOVIEDB_API_URL}/movie/${movieId}/translations`, {
     headers,
   });
 }
